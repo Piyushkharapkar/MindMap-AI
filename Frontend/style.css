@@ -1,0 +1,602 @@
+/* MindMap AI - Creative Cosmic Theme
+   A unique cosmic-inspired design with vibrant gradients and sleek visuals */
+
+   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@400;500;700&display=swap');
+
+   /* Base Reset */
+   *, *::before, *::after {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+   }
+   
+   :root {
+     --bg-gradient-start: #0f172a;
+     --bg-gradient-end: #1e293b;
+     --accent-purple: #8b5cf6;
+     --accent-pink: #ec4899;
+     --accent-blue: #3b82f6;
+     --text-primary: #f8fafc;
+     --text-secondary: #cbd5e1;
+     --card-bg: rgba(30, 41, 59, 0.7);
+     --card-border: rgba(148, 163, 184, 0.1);
+     --input-bg: rgba(15, 23, 42, 0.6);
+     --node-main: #3b82f6;
+     --node-hover: #8b5cf6;
+     --node-root: #ec4899;
+     --edge-color: rgba(203, 213, 225, 0.6);
+   }
+   
+   body {
+     font-family: 'Outfit', sans-serif;
+     background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+     color: var(--text-primary);
+     min-height: 100vh;
+     overflow-x: hidden;
+     position: relative;
+   }
+   
+   /* Cosmic background decorations */
+   body::before, body::after {
+     content: '';
+     position: absolute;
+     border-radius: 50%;
+     z-index: -1;
+     opacity: 0.4;
+     filter: blur(60px);
+   }
+   
+   body::before {
+     background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
+     width: 50vw;
+     height: 50vw;
+     top: -15vw;
+     right: -15vw;
+   }
+   
+   body::after {
+     background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+     width: 40vw;
+     height: 40vw;
+     bottom: -10vw;
+     left: -10vw;
+   }
+   
+   /* Starry background effect */
+   .container::before {
+     content: '';
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-image: 
+       radial-gradient(1px 1px at 25% 15%, white, transparent),
+       radial-gradient(1px 1px at 50% 40%, white, transparent),
+       radial-gradient(1px 1px at 75% 25%, white, transparent),
+       radial-gradient(1px 1px at 30% 65%, white, transparent),
+       radial-gradient(1px 1px at 65% 80%, white, transparent),
+       radial-gradient(1px 1px at 85% 50%, white, transparent);
+     background-repeat: repeat;
+     background-size: 150px 150px;
+     opacity: 0.15;
+     z-index: -2;
+   }
+   
+   .container {
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 2.5rem 1.5rem;
+     display: flex;
+     flex-direction: column;
+     gap: 2rem;
+   }
+   
+   h1 {
+     font-family: 'Space Grotesk', sans-serif;
+     font-weight: 700;
+     font-size: 2.75rem;
+     letter-spacing: -0.03em;
+     text-align: center;
+     margin-bottom: 0.75rem;
+     position: relative;
+     display: inline-block;
+     align-self: center;
+     background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+     -webkit-background-clip: text;
+     background-clip: text;
+     color: transparent;
+   }
+   
+   .input-container {
+     background: var(--card-bg);
+     border: 1px solid var(--card-border);
+     border-radius: 16px;
+     padding: 1.75rem;
+     backdrop-filter: blur(12px);
+     box-shadow: 
+       0 10px 25px rgba(0, 0, 0, 0.2),
+       0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+   }
+   
+   label {
+     font-family: 'Space Grotesk', sans-serif;
+     font-weight: 500;
+     font-size: 1.125rem;
+     color: var(--accent-purple);
+     margin-bottom: 0.25rem;
+     letter-spacing: -0.01em;
+   }
+   
+   #topic {
+     background: var(--input-bg);
+     border: 1px solid var(--card-border);
+     border-radius: 12px;
+     color: var(--text-primary);
+     font-family: 'Outfit', sans-serif;
+     font-size: 1rem;
+     padding: 1rem 1.25rem;
+     transition: all 0.3s ease;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   }
+   
+   #topic::placeholder {
+     color: var(--text-secondary);
+     opacity: 0.6;
+   }
+   
+   #topic:focus {
+     outline: none;
+     border-color: var(--accent-purple);
+     box-shadow: 
+       0 0 0 3px rgba(139, 92, 246, 0.3),
+       0 4px 6px rgba(0, 0, 0, 0.1);
+   }
+   
+   #generate {
+     background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+     border: none;
+     border-radius: 12px;
+     color: white;
+     font-family: 'Space Grotesk', sans-serif;
+     font-weight: 600;
+     font-size: 1.0625rem;
+     padding: 1rem 1.5rem;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     box-shadow: 
+       0 4px 12px rgba(59, 130, 246, 0.3),
+       0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+     margin-top: 0.5rem;
+     letter-spacing: 0.01em;
+     position: relative;
+     overflow: hidden;
+     z-index: 1;
+   }
+   
+   #generate::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: -100%;
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+     transition: all 0.6s ease;
+     z-index: -1;
+   }
+   
+   #generate:hover {
+     transform: translateY(-2px);
+     box-shadow: 
+       0 6px 20px rgba(59, 130, 246, 0.4),
+       0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+   }
+   
+   #generate:hover::before {
+     left: 100%;
+   }
+   
+   #generate:active {
+     transform: translateY(1px);
+     box-shadow: 
+       0 2px 8px rgba(59, 130, 246, 0.3),
+       0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+   }
+   
+   #cy {
+     height: 600px;
+     width: 100%;
+     background: var(--card-bg);
+     border: 1px solid var(--card-border);
+     border-radius: 16px;
+     overflow: hidden;
+     backdrop-filter: blur(12px);
+     box-shadow: 
+       0 10px 25px rgba(0, 0, 0, 0.2),
+       0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+   }
+   
+   #error-message {
+     color: var(--accent-pink);
+     text-align: center;
+     font-size: 0.95rem;
+     font-weight: 500;
+     min-height: 24px;
+     padding: 0.5rem;
+     border-radius: 8px;
+     max-width: 80%;
+     margin: 0 auto;
+     background: rgba(236, 72, 153, 0.1);
+     border: 1px solid rgba(236, 72, 153, 0.2);
+     opacity: 0;
+     transition: opacity 0.3s ease;
+   }
+   
+   #error-message:not(:empty) {
+     opacity: 1;
+   }
+   
+   /* Custom Cytoscape Styling - Will be applied by JS */
+   /* Root node styling */
+   .cy-root-node {
+     background-color: var(--node-root) !important;
+     border: 2px solid rgba(255, 255, 255, 0.6) !important;
+     font-size: 16px !important;
+     text-outline-width: 2px !important;
+     text-outline-color: rgba(15, 23, 42, 0.8) !important;
+     font-weight: bold !important;
+     padding: 12px !important;
+     text-valign: center !important;
+     text-halign: center !important;
+     box-shadow: 0 0 20px rgba(236, 72, 153, 0.5) !important;
+   }
+   
+   /* Branch node styling */
+   .cy-branch-node {
+     background-color: var(--node-main) !important;
+     border: 2px solid rgba(255, 255, 255, 0.4) !important;
+     font-size: 14px !important;
+     text-outline-width: 2px !important;
+     text-outline-color: rgba(15, 23, 42, 0.8) !important;
+     font-weight: bold !important;
+     padding: 10px !important;
+     text-valign: center !important;
+     text-halign: center !important;
+   }
+   
+   /* Subtopic node styling */
+   .cy-subtopic-node {
+     background-color: rgba(203, 213, 225, 0.2) !important;
+     border: 1px solid rgba(255, 255, 255, 0.3) !important;
+     color: white !important;
+     font-size: 12px !important;
+     text-outline-width: 1px !important;
+     text-outline-color: rgba(15, 23, 42, 0.8) !important;
+     padding: 8px !important;
+     text-valign: center !important;
+     text-halign: center !important;
+   }
+   
+   /* Add these styles to your JS after cytoscape initialization */
+   /* Update your renderMindMap function to include these custom classes and styles */
+   
+   /* Responsive styles */
+   @media (max-width: 768px) {
+     .container {
+       padding: 1.5rem 1rem;
+     }
+     
+     h1 {
+       font-size: 2rem;
+     }
+     
+     #cy {
+       height: 450px;
+     }
+     
+     .input-container {
+       padding: 1.25rem;
+     }
+     
+     #generate {
+       padding: 0.875rem 1.25rem;
+     }
+   }
+   
+   /* Loading animation */
+   @keyframes pulse {
+     0% { opacity: 0.6; }
+     50% { opacity: 1; }
+     100% { opacity: 0.6; }
+   }
+   
+   .loading {
+     animation: pulse 1.5s infinite;
+   }
+   
+   /* Add loading spinner */
+   .spinner {
+     display: none;
+     width: 40px;
+     height: 40px;
+     margin: 20px auto;
+     border: 4px solid rgba(255, 255, 255, 0.1);
+     border-radius: 50%;
+     border-top-color: var(--accent-purple);
+     animation: spin 1s ease-in-out infinite;
+   }
+   
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
+   
+
+
+   /* New Elements CSS for MindMap AI - Cosmic Theme */
+
+/* Action Buttons Container */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Download Buttons (PNG & PDF) */
+#download-png, 
+#download-pdf {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 12px rgba(59, 130, 246, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#download-png::before,
+#download-pdf::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+#download-png:hover,
+#download-pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(59, 130, 246, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+#download-png:hover::before,
+#download-pdf:hover::before {
+  left: 100%;
+}
+
+#download-png:active,
+#download-pdf:active {
+  transform: translateY(1px);
+  box-shadow: 
+    0 2px 8px rgba(59, 130, 246, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+#node-content {
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+#node-content:focus {
+  outline: none;
+  border-color: var(--accent-purple);
+  box-shadow: 
+    0 0 0 3px rgba(139, 92, 246, 0.3),
+    0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+#save-content {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+#save-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+#save-content:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+#cancel-edit {
+  background: rgba(203, 213, 225, 0.1);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#cancel-edit:hover {
+  background: rgba(203, 213, 225, 0.15);
+  color: var(--text-primary);
+}
+
+#cancel-edit:active {
+  transform: translateY(1px);
+}
+
+/* Responsive styles for new elements */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin: 0 auto 1.5rem;
+    max-width: 85%;
+  }
+  
+  #download-png, 
+  #download-pdf {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  
+  .modal h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  #node-content {
+    padding: 0.875rem 1rem;
+  }
+  
+  .modal-buttons {
+    justify-content: space-between;
+  }
+  
+  #save-content,
+  #cancel-edit {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+
+   /* Add this to JS to make nodes glow on hover */
+   /* 
+   cy.on('mouseover', 'node', function(e) {
+     e.target.style('background-color', var(--node-hover));
+     e.target.style('box-shadow', '0 0 15px rgba(139, 92, 246, 0.7)');
+     e.target.connectedEdges().style('line-color', 'rgba(139, 92, 246, 0.8)');
+     e.target.connectedEdges().style('width', '3px');
+   });
+   
+   cy.on('mouseout', 'node', function(e) {
+     if (e.target.id() === data.topic) {
+       e.target.style('background-color', var(--node-root));
+     } else if (e.target.id().includes('branch_')) {
+       e.target.style('background-color', var(--node-main));
+     } else {
+       e.target.style('background-color', 'rgba(203, 213, 225, 0.2)');
+     }
+     e.target.style('box-shadow', 'none');
+     e.target.connectedEdges().style('line-color', var(--edge-color));
+     e.target.connectedEdges().style('width', '2px');
+   });
+   */

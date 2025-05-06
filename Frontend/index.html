@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMap AI - Smart Idea Mapper</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Include Cytoscape.js library -->
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+    <!-- Include jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>MindMap AI - Smart Idea Mapper</h1>
+        <div class="input-container">
+            <label for="topic">Enter a Topic:</label>
+            <input type="text" id="topic" placeholder="e.g., Artificial Intelligence" />
+            <button id="generate">Generate Mind Map</button>
+        </div>
+
+        <div class="action-buttons">
+            <button id="download-png">Download PNG</button>
+            <button id="download-pdf">Download PDF</button>
+        </div>
+
+        <div id="cy" class="cy-container"></div>
+
+        <div id="error-message"></div>
+        
+        <!-- Node Editor Modal -->
+        <div id="editor-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Edit Node Content</h3>
+                <input type="text" id="node-content" />
+                <div class="modal-buttons">
+                    <button id="save-content">Save</button>
+                    <button id="cancel-edit">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# Exclude Python configuration files and virtual environment
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.venv
+env/
+venv/
+*.egg
+*.egg-info/
+.eggs/
+*.sqlite3
+*.log
+*.pot
+*.mo
+*.pid
+*.coverage
+*.cover
+*.py,cover
+*.hypothesis/
+*.pytest_cache/
+*.tox/
+*.nox/
+*.mypy_cache/
+*.dmypy.json
+*.pyre/
+*.pytype/
+*.ipynb_checkpoints/
+
+# Exclude IDE and editor configuration files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Exclude OS generated files
+.DS_Store
+Thumbs.db
